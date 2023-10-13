@@ -1,7 +1,7 @@
 name: Codacy Security Scan
 
 on:
-  workflow_dispatch:
+  workflow call:
 permissions:
   actions: read
   contents: read
