@@ -14,8 +14,8 @@ on:
         type: string  
 jobs:
   codacy-security-scan:
-    if: ${{ inputs.code-quality-check }} == 'yes'
     name: Codacy Security Scan
+    if: ${{ inputs.code-quality-check }} == 'yes'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
