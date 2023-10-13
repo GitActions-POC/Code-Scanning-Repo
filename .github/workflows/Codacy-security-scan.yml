@@ -9,8 +9,12 @@ on:
       format:  
         required: true
         type: string
+      code-quality-check:  
+        required: true
+        type: string  
 jobs:
   codacy-security-scan:
+    if: ${{ inputs.code-quality-check }} == 'yes'
     name: Codacy Security Scan
     runs-on: ubuntu-latest
     steps:
