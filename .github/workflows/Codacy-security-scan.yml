@@ -2,10 +2,6 @@ name: Codacy Security Scan
 
 on:
   workflow_call:
-permissions:
-  actions: read
-  contents: read
-  security-events: write
 jobs:
   codacy-security-scan:
     name: Codacy Security Scan
