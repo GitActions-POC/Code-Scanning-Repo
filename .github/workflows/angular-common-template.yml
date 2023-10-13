@@ -1,0 +1,45 @@
+name: angular-common-template
+
+on:
+  workflow_call:
+    inputs:
+      NodeJS-version:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+      publish_dir:
+        required: true
+        type: string  
+      enable_jekyll:
+        required: true
+        type: string
+jobs:
+  angular-common-workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ' ${{ inputs.NodeJS-version }}'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test:headless
+      
+    - name: Build
+      run: npm run build:${{ inputs.environment }}
+      
+    - name: Deploy
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ inputs.publish_dir }}
+        enable_jekyll: ${{ inputs.enable_jekyll }}
